@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Additem />
     <Todolist />
     <router-view />
   </div>
@@ -7,11 +8,12 @@
 
 <script>
 import  Todolist from '@/components/Todolist.vue'
-
+import Additem from '@/components/Additem.vue'
 export default {
   name: 'List',
   components: {
-   Todolist
+   Todolist,
+   Additem
   }
 }
 </script>
