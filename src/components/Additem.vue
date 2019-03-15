@@ -17,7 +17,6 @@
         v-model="Dodate"
         name="date"
         placeholder="date"
-        required
       ><br>
       <input
         v-model="finish"
@@ -31,7 +30,9 @@
         name="finish"
         value="false"
       >unfinish<br>
-      <button>submit</button>
+      <button @click="postdata()">
+        submit
+      </button>
       <input type="reset">
     </form>
     <p>{{ `${Topic}=>${Content}=>${Dodate}=>${finish}` }}</p>
@@ -49,6 +50,22 @@ export default {
        Content:'',
        Dodate:'',
        finish:'',
+    }
+  },
+  methods:{
+    postdata(){
+      axios.post(`${cfg.apiAddress}/list`,{
+        Topic:this.Topic,
+        Content:this.Content,
+        Dodate:this.Dodate,
+        finish:this.finish
+      })
+      .then((response)=>{
+        alert(response.data)
+      })
+      .catch((err)=>{
+        alert(err)
+      })
     }
   }
 }
