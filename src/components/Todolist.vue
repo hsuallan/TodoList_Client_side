@@ -1,17 +1,35 @@
 <template>
   <div>
-    <div v-if="loading">
-      Loading... please wait
+    <div
+      v-if="loading"
+      class="loading"
+    >
+      <Spin fix>
+        <Icon
+          type="ios-loading"
+          size="18"
+          class="demo-spin-icon-load"
+        />
+        <div>Loading...</div>
+      </Spin>
     </div>
     <div v-else>
-      <p
-        v-for="item in items"
-        :key="item.id"
-        class="card"
-        @click="detail(item.id)"
+      <Collapse
+        v-model="openid"
+        accordion
       >
-        {{ `${item.Topic} :  ${item.id}` }}
-      </p>
+        <Panel
+          v-for="item in items"
+          :key="item.id"
+          :name="item.id"
+          class="ptitle"
+        >
+          {{ item.Topic }}
+          <p slot="content">
+            {{ `${item.Topic} :  ${item.id}` }}
+          </p>
+        </Panel>
+      </Collapse>
     </div>
   </div>
 </template>
@@ -30,6 +48,7 @@ export default {
         default:'',
         type:Object
       },
+      openid:'',
       loading:true,
     }
   },
@@ -58,5 +77,14 @@ export default {
   margin-bottom: 10px;
   background:aqua;
 }
-
+.demo-spin-icon-load{
+  animation: ani-demo-spin 1s linear infinite;
+}
+.loading{
+  height: 100px;
+  position: relative;
+}
+.ptitle{
+  text-align: left;
+}
 </style>
